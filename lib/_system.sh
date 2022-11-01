@@ -9,14 +9,14 @@
 #######################################
 system_create_user() {
   print_banner
-  printf "${WHITE} 💻 Agora, vamos criar o usuário para a instancia...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Lassen Sie uns nun den Benutzer für die Instanz erstellen...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
   sudo su - root <<EOF
-  useradd -m -p $(openssl passwd -crypt ${mysql_root_password}) -s /bin/bash -G sudo owenzap
-  usermod -aG sudo owenzap
+  useradd -m -p $(openssl passwd -crypt ${mysql_root_password}) -s /bin/bash -G sudo mrx
+  usermod -aG sudo mrx
 EOF
 
   sleep 2
@@ -29,14 +29,14 @@ EOF
 #######################################
 system_git_clone() {
   print_banner
-  printf "${WHITE} 💻 Fazendo download do código Owen Zap...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Herunterladen des Codes von Owen Zap (Git)...${GRAY_LIGHT}"
   printf "\n\n"
 
 
   sleep 2
 
-  sudo su - owenzap <<EOF
-  git clone https://github.com/jjluizgomes/whaticket  /home/owenzap/${instancia_add}/
+  sudo su - mrx <<EOF
+  git clone https://github.com/jjluizgomes/whaticket  /home/mrx/${instancia_add}/
 EOF
 
   sleep 2
@@ -49,7 +49,7 @@ EOF
 #######################################
 system_update() {
   print_banner
-  printf "${WHITE} 💻 Vamos atualizar o sistema Owen Zap...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Lassen Sie uns das Owen Zap-System aktualisieren...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -68,7 +68,7 @@ EOF
 #######################################
 system_node_install() {
   print_banner
-  printf "${WHITE} 💻 Instalando nodejs...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Installiere nodejs...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -96,7 +96,7 @@ EOF
 #######################################
 system_docker_install() {
   print_banner
-  printf "${WHITE} 💻 Instalando docker...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Installiere docker...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -129,7 +129,7 @@ EOF
 #######################################
 system_puppeteer_dependencies() {
   print_banner
-  printf "${WHITE} 💻 Instalando puppeteer dependencies...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Installiere puppeteer Abhängigkeiten...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -190,15 +190,15 @@ EOF
 #######################################
 system_pm2_install() {
   print_banner
-  printf "${WHITE} 💻 Instalando pm2...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Installiere pm2...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
   sudo su - root <<EOF
   npm install -g pm2
-  pm2 startup ubuntu -u owenzap
-  env PATH=\$PATH:/usr/bin pm2 startup ubuntu -u owenzap --hp /home/owenzap/${instancia_add}
+  pm2 startup ubuntu -u mrx
+  env PATH=\$PATH:/usr/bin pm2 startup ubuntu -u mrx --hp /home/mrx/${instancia_add}
 EOF
 
   sleep 2
@@ -211,7 +211,7 @@ EOF
 #######################################
 system_snapd_install() {
   print_banner
-  printf "${WHITE} 💻 Instalando snapd...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Installiere snapd...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -232,7 +232,7 @@ EOF
 #######################################
 system_certbot_install() {
   print_banner
-  printf "${WHITE} 💻 Instalando certbot...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Installiere certbot...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -253,7 +253,7 @@ EOF
 #######################################
 system_nginx_install() {
   print_banner
-  printf "${WHITE} 💻 Instalando nginx...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Installiere nginx...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -273,7 +273,7 @@ EOF
 #######################################
 system_nginx_restart() {
   print_banner
-  printf "${WHITE} 💻 reiniciando nginx...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Starte nginx neu (restart)...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -292,14 +292,14 @@ EOF
 #######################################
 system_nginx_conf() {
   print_banner
-  printf "${WHITE} 💻 configurando nginx...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Konfiguriere nginx...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
 sudo su - root << EOF
 
-cat > /etc/nginx/conf.d/owenzap.conf << 'END'
+cat > /etc/nginx/conf.d/mrx.conf << 'END'
 client_max_body_size 100M;
 END
 
@@ -315,7 +315,7 @@ EOF
 #######################################
 system_certbot_setup() {
   print_banner
-  printf "${WHITE} 💻 Configurando certbot...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Konfiguriere certbot...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
