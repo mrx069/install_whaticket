@@ -9,13 +9,13 @@
 #######################################
 frontend_node_dependencies() {
   print_banner
-  printf "${WHITE} 💻 Instalando dependências do frontend...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» Frontend-AbhÃ¤ngigkeiten werden installiert...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
-  sudo su - owenzap <<EOF
-  cd /home/owenzap/${instancia_add}/frontend
+  sudo su - mrx <<EOF
+  cd /home/mrx/${instancia_add}/frontend
   npm install
 EOF
 
@@ -29,13 +29,13 @@ EOF
 #######################################
 frontend_node_build() {
   print_banner
-  printf "${WHITE} 💻 Compilando o código do frontend...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» Kompilieren des Frontend-Codes...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
-  sudo su - owenzap <<EOF
-  cd /home/owenzap/${instancia_add}/frontend
+  sudo su - mrx <<EOF
+  cd /home/mrx/${instancia_add}/frontend
   npm install
   npm run build
 EOF
@@ -50,16 +50,16 @@ EOF
 #######################################
 frontend_update() {
   print_banner
-  printf "${WHITE} 💻 Atualizando o frontend...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» Aktualisierung des Frontends...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
-  sudo su - owenzap <<EOF
-  cd /home/owenzap/${instancia_add}
+  sudo su - mrx <<EOF
+  cd /home/mrx/${instancia_add}
   pm2 stop ${instancia_add}-frontend
   git pull
-  cd /home/owenzap/${instancia_add}/frontend
+  cd /home/mrx/${instancia_add}/frontend
   npm install
   rm -rf build
   npm run build
@@ -78,7 +78,7 @@ EOF
 #######################################
 frontend_set_env() {
   print_banner
-  printf "${WHITE} 💻 Configurando variáveis de ambiente (frontend)...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» Umgebungsvariablen setzen (Frontend)...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -88,8 +88,8 @@ frontend_set_env() {
   backend_url=${backend_url%%/*}
   backend_url=https://$backend_url
 
-sudo su - owenzap << EOF
-  cat <<[-]EOF > /home/owenzap/${instancia_add}/frontend/.env
+sudo su - mrx << EOF
+  cat <<[-]EOF > /home/mrx/${instancia_add}/frontend/.env
 REACT_APP_BACKEND_URL=${backend_url}
 REACT_APP_HOURS_CLOSE_TICKETS_AUTO = 24
 [-]EOF
@@ -97,8 +97,8 @@ EOF
 
   sleep 2
 
-sudo su - owenzap << EOF
-  cat <<[-]EOF > /home/owenzap/${instancia_add}/frontend/server.js
+sudo su - mrx << EOF
+  cat <<[-]EOF > /home/mrx/${instancia_add}/frontend/server.js
 //simple express server to run frontend production build;
 const express = require("express");
 const path = require("path");
@@ -122,13 +122,13 @@ EOF
 #######################################
 frontend_start_pm2() {
   print_banner
-  printf "${WHITE} 💻 Iniciando pm2 (frontend)...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» Initialisiere pm2 (Frontend)...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
-  sudo su - owenzap <<EOF
-  cd /home/owenzap/${instancia_add}/frontend
+  sudo su - mrx <<EOF
+  cd /home/mrx/${instancia_add}/frontend
   pm2 start server.js --name ${instancia_add}-frontend
   pm2 save
 EOF
@@ -143,7 +143,7 @@ EOF
 #######################################
 frontend_nginx_setup() {
   print_banner
-  printf "${WHITE} 💻 Configurando nginx (frontend)...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» Konfiguration von nginx (Frontend)...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
