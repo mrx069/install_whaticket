@@ -8,7 +8,7 @@
 #######################################
 backend_redis_create() {
   print_banner
-  printf "${WHITE} ðŸ’» Erstellung von Redis & Postgre Datenbank...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Erstellung von Redis & Postgre Datenbank...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -39,7 +39,7 @@ sleep 2
 #######################################
 backend_set_env() {
   print_banner
-  printf "${WHITE} ðŸ’» Umgebungsvariablen setzen (Backend)...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Umgebungsvariablen setzen (Backend)...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -90,7 +90,7 @@ EOF
 #######################################
 backend_node_dependencies() {
   print_banner
-  printf "${WHITE} ðŸ’» Installieren von Backend-AbhÃ¤ngigkeiten...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Installieren von Backend-Abhängigkeiten...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -110,7 +110,7 @@ EOF
 #######################################
 backend_node_build() {
   print_banner
-  printf "${WHITE} ðŸ’» Backend-Code kompilieren...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Backend-Code kompilieren...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -131,7 +131,7 @@ EOF
 #######################################
 backend_update() {
   print_banner
-  printf "${WHITE} ðŸ’» Aktualisierung des Backends...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Aktualisierung des Backends...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -162,7 +162,7 @@ EOF
 #######################################
 backend_db_migrate() {
   print_banner
-  printf "${WHITE} ðŸ’» AusfÃ¼hren von db:migrate...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Ausführen von db:migrate...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -182,7 +182,7 @@ EOF
 #######################################
 backend_db_seed() {
   print_banner
-  printf "${WHITE} ðŸ’» AusfÃ¼hren von db:seed...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Ausführen von db:seed...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -203,7 +203,7 @@ EOF
 #######################################
 backend_start_pm2() {
   print_banner
-  printf "${WHITE} ðŸ’» Initialisiere pm2 (Backend)...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Initialisiere pm2 (Backend)...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -223,7 +223,7 @@ EOF
 #######################################
 backend_nginx_setup() {
   print_banner
-  printf "${WHITE} ðŸ’» Konfiguriere nginx (Backend)...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Konfiguriere nginx (Backend)...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
