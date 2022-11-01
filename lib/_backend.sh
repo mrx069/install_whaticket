@@ -8,13 +8,13 @@
 #######################################
 backend_redis_create() {
   print_banner
-  printf "${WHITE} 💻 Criando Redis & Banco Postgres...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» Erstellung von Redis & Postgre Datenbank...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
   sudo su - root <<EOF
-  usermod -aG docker owenzap
+  usermod -aG docker mrx
   docker run --name redis-${instancia_add} -p ${redis_port}:6379 --restart always --detach redis redis-server --requirepass ${mysql_root_password}
   
   sleep 2
@@ -39,7 +39,7 @@ sleep 2
 #######################################
 backend_set_env() {
   print_banner
-  printf "${WHITE} 💻 Configurando variáveis de ambiente (backend)...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» Umgebungsvariablen setzen (Backend)...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -54,8 +54,8 @@ backend_set_env() {
   frontend_url=${frontend_url%%/*}
   frontend_url=https://$frontend_url
 
-sudo su - owenzap << EOF
-  cat <<[-]EOF > /home/owenzap/${instancia_add}/backend/.env
+sudo su - mrx << EOF
+  cat <<[-]EOF > /home/mrx/${instancia_add}/backend/.env
 NODE_ENV=
 BACKEND_URL=${backend_url}
 FRONTEND_URL=${frontend_url}
@@ -90,13 +90,13 @@ EOF
 #######################################
 backend_node_dependencies() {
   print_banner
-  printf "${WHITE} 💻 Instalando dependências do backend...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» Installieren von Backend-AbhÃ¤ngigkeiten...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
-  sudo su - owenzap <<EOF
-  cd /home/owenzap/${instancia_add}/backend
+  sudo su - mrx <<EOF
+  cd /home/mrx/${instancia_add}/backend
   npm install
 EOF
 
@@ -110,13 +110,13 @@ EOF
 #######################################
 backend_node_build() {
   print_banner
-  printf "${WHITE} 💻 Compilando o código do backend...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» Backend-Code kompilieren...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
-  sudo su - owenzap <<EOF
-  cd /home/owenzap/${instancia_add}/backend
+  sudo su - mrx <<EOF
+  cd /home/mrx/${instancia_add}/backend
   npm install
   npm run build
 EOF
@@ -131,16 +131,16 @@ EOF
 #######################################
 backend_update() {
   print_banner
-  printf "${WHITE} 💻 Atualizando o backend...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» Aktualisierung des Backends...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
-  sudo su - owenzap <<EOF
-  cd /home/owenzap/${instancia_add}
+  sudo su - mrx <<EOF
+  cd /home/mrx/${instancia_add}
   pm2 stop ${instancia_add}-backend
   git pull
-  cd /home/owenzap/${instancia_add}/backend
+  cd /home/mrx/${instancia_add}/backend
   npm install
   npm update -f
   npm install @types/fs-extra
@@ -162,13 +162,13 @@ EOF
 #######################################
 backend_db_migrate() {
   print_banner
-  printf "${WHITE} 💻 Executando db:migrate...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» AusfÃ¼hren von db:migrate...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
-  sudo su - owenzap <<EOF
-  cd /home/owenzap/${instancia_add}/backend
+  sudo su - mrx <<EOF
+  cd /home/mrx/${instancia_add}/backend
   npx sequelize db:migrate
 EOF
 
@@ -182,13 +182,13 @@ EOF
 #######################################
 backend_db_seed() {
   print_banner
-  printf "${WHITE} 💻 Executando db:seed...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» AusfÃ¼hren von db:seed...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
-  sudo su - owenzap <<EOF
-  cd /home/owenzap/${instancia_add}/backend
+  sudo su - mrx <<EOF
+  cd /home/mrx/${instancia_add}/backend
   npx sequelize db:seed:all
 EOF
 
@@ -203,13 +203,13 @@ EOF
 #######################################
 backend_start_pm2() {
   print_banner
-  printf "${WHITE} 💻 Iniciando pm2 (backend)...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» Initialisiere pm2 (Backend)...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
 
-  sudo su - owenzap <<EOF
-  cd /home/owenzap/${instancia_add}/backend
+  sudo su - mrx <<EOF
+  cd /home/mrx/${instancia_add}/backend
   pm2 start dist/server.js --name ${instancia_add}-backend
 EOF
 
@@ -223,7 +223,7 @@ EOF
 #######################################
 backend_nginx_setup() {
   print_banner
-  printf "${WHITE} 💻 Configurando nginx (backend)...${GRAY_LIGHT}"
+  printf "${WHITE} ðŸ’» Konfiguriere nginx (Backend)...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
